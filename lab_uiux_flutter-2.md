@@ -235,21 +235,23 @@ Prompt ที่ไม่ดี:
 
 **ขั้นตอนที่ 1.4: บันทึกผล**
 
-| รายการ | ค่าที่ได้ |
-|--------|---------|
-| Primary Color (Hex) | _________________ |
-| Secondary Color (Hex) | _________________ |
-| Primary Container (Hex) | _________________ |
-| Surface (Hex) | _________________ |
+| รายการ                  | ค่าที่ได้ |
+| ----------------------- | --------- |
+| Primary Color (Hex)     | #133665   |
+| Secondary Color (Hex)   | #2e3647   |
+| Primary Container (Hex) | #506da0   |
+| Surface (Hex)           | #f9f9ff   |
+
 
 > **คำถาม:** Primary, On Primary, Primary Container, On Primary Container คืออะไร มีลักษณะความสัมพันธ์ของสีอย่างไร?  วิเคราะห์และเติมตารางด้านล่าง
 
-| สี | หน้าที่ |
-|-----|--------|
-| Primary | _________________ |
-| On Primary | _________________ |
-| Primary Container | _________________ |
-| On Primary Container | _________________ |
+| สี                   | หน้าที่                                                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Primary              | สีหลักของแบรนด์ ใช้กับองค์ประกอบที่ต้องการความโดดเด่นสูงสุด เช่น ปุ่มหลัก (Filled Button) FAB องค์ประกอบที่ active อยู่ |
+| On Primary           | สีของข้อความ ไอคอน ที่วางอยู่ บน พื้นสี Primary เช่น ตัวหนังสือบนปุ่มสี Primary ต้องคมชัดอ่านง่าย                       |
+| Primary Container    | สีพื้นหลังของ กล่อง พื้นที่ ที่เกี่ยวข้องกับ Primary แต่ต้องการความเน้นน้อยกว่า เช่น การ์ด ชิป พื้นหลังปุ่มรอง          |
+| On Primary Container | สีของข้อความ ไอคอน ที่วางอยู่ บน พื้นสี Primary Container ให้อ่านง่ายบนพื้นหลังที่อ่อนกว่า                              |
+
 
 ---
 
@@ -383,6 +385,10 @@ Screenshot หน้าจอ Design ทั้ง 3 หน้า และบั
 วางรูปหน้าจอ ที่นี่
 ```
 
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
 ---
 
 ### การทดลองที่ 3: แปลง Design เป็น Flutter Code
@@ -873,17 +879,18 @@ flutter run
 ```
 
 ตรวจสอบความถูกต้อง:
-- [ ] App Bar แสดงชื่อ "Green Market"
-- [ ] แสดงรายการสินค้า Card ทั้ง 4 รายการถูกต้อง
-- [ ] กด Card สินค้าแล้ว Navigate ไปยัง Detail Screen ได้
-- [ ] กด Back / ปุ่มย้อนกลับได้ถูกต้อง
-- [ ] Bottom Navigation สลับ Tab ได้
-- [ ] FAB แสดง SnackBar เมื่อถูกคลิก
+- [✔] App Bar แสดงชื่อ "Green Market"
+- [✔] แสดงรายการสินค้า Card ทั้ง 4 รายการถูกต้อง
+- [✔] กด Card สินค้าแล้ว Navigate ไปยัง Detail Screen ได้
+- [✔] กด Back / ปุ่มย้อนกลับได้ถูกต้อง
+- [✔] Bottom Navigation สลับ Tab ได้
+- [✔] FAB แสดง SnackBar เมื่อถูกคลิก
 
 **แก้ไขเปลี่ยนแปลง App Bar ให้แสดง คำว่า "Dev by" ตามด้วยชื่อนักศึกษา** แล้วบันทึกรูปผลการทดลอง
 ```image
 บันทึกรูปที่นี่
 ``` 
+![alt text](image-4.png)
 ---
 
 ### การทดลองที่ 4: ใช้ AI ช่วย Generate UI Component (30 นาที)
@@ -924,12 +931,12 @@ Add brief comments explaining each section.
 
 อ่าน code ที่ AI สร้างและตอบคำถาม:
 
-| คำถาม | คำตอบ |
-|-------|-------|
-| AI ใช้ Widget อะไรสร้าง Avatar? | _________________ |
-| AI handle กรณี avatarUrl เป็น null อย่างไร? | _________________ |
-| AI ใช้ color จาก Theme หรือ hardcode? | _________________ |
-| มีส่วนไหนที่ควรปรับปรุง? | _________________ |
+| คำถาม                                       | คำตอบ                                                                                                                                                                                                                                                          |
+| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AI ใช้ Widget อะไรสร้าง Avatar?             | ใช้ **`CircleAvatar`** กำหนดขนาดด้วย `radius: 32`                                                                                                                                                                                                              |
+| AI handle กรณี avatarUrl เป็น null อย่างไร? | **การ handle กรณี `avatarUrl` เป็น null** เช็คเงื่อนไข `avatarUrl != null` ถ้ามี URL จะโหลดรูปผ่าน `backgroundImage: NetworkImage(...)` ถ้าเป็น `null` จะใส่ `Text` ตัวอักษรย่อ (Initials) เข้าไปใน `child` แทน                                                |
+| AI ใช้ color จาก Theme หรือ hardcode?       | **การใช้สี (Theme vs Hardcode)** ดึงจาก **Theme ทั้งหมด** (ผ่าน `Theme.of(context).colorScheme`) เช่น ใช้ `onSurfaceVariant` กับอีเมลและตัวเลขสถิติ ไม่มี Hardcode รหัสสี HEX หรือ `Colors.blue`                                                               |
+| มีส่วนไหนที่ควรปรับปรุง?                    | **Initials Logic:**เพิ่มเคสป้องกัน Error หากส่ง `name` เป็นข้อความว่าง**Image Error:** ใส่ `onForegroundImageError` หรือรองรับรูปโหลดไม่ขึ้น**Button Callbacks:** เพิ่ม `onFollowPressed` และ `onMessagePressed` ใน Constructor เพื่อให้กดปุ่มแล้วทำงานได้จริง |
 
 **ขั้นตอนที่ 4.4: นำ Code ไปใช้ใน Project**
 
@@ -954,6 +961,16 @@ Add brief comments explaining each section.
    
 ```text
 เขียนผลการเปรียบเทียบที่นี่
+1. ความเหมือนและความสอดคล้อง
+	Widget Tree ที่วิเคราะห์ไว้กับ Code ที่ได้มีความตรงกันในส่วนของโครงสร้างหลัก (Root & Major Layout) เช่น การใช้ `Scaffold` เป็นฐาน, การมี `AppBar` ด้านบน, การใช้ `ListView` เป็นส่วนแสดงผลรายการสินค้า, การมี `FloatingActionButton.extended` สำหรับเพิ่มสินค้า และการใช้ `NavigationBar` สำหรับแถบเมนูด้านล่าง
+
+2. สิ่งที่มีเพิ่มขึ้นมาหรือต่างจากที่คิดไว้
+	ในการเขียน Code จริง (หรือ Code ที่ AI เจนให้) มีการลงรายละเอียด Widget ย่อยที่ไม่ได้เขียนไว้บน Whiteboard เช่น:
+- ในส่วนของ `ItemCard` มีการใช้ `Card`, `Padding`, `Row`, `CircleAvatar` และ `Expanded` ซ้อนกันเพื่อจัดเลย์เอาต์ย่อยภายใน
+- การใช้ `ListView.separated` แทน `ListView` ธรรมดา เพื่อจัดการระยะห่าง (`SizedBox`) ระหว่าง ItemCard ให้สวยงาม
+  
+2. สรุปสิ่งที่ได้เรียนรู้
+	การวาด Widget Tree ช่วยให้เห็นภาพรวมของโครงสร้างหน้าจอ (Structure High-Level) ชัดเจนขึ้นก่อนลงมือเขียนโค้ด ทำให้เขียน Flutter Code ได้มีทิศทาง ไม่สับสนเรื่องการ Nesting ของ Widget ชั้นนอก และช่วยให้เลือกใช้ Material 3 Component ได้เหมาะสมยิ่งขึ้น
 
 ```
 ---
